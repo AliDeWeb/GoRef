@@ -133,7 +133,7 @@ func main() {
 	name, age, address := "ali", 18, "iran"
 
 	// printf will format out string with the args we pass to it
-	//* %v => general | %s => string | %T => var type | %d => integer | %f => float
+	//* %v => general | %s => string | %T => var type | %d => integer | %f => float | %q => escaped string | %c => rune
 	//* \n creates a new line in console
 	fmt.Printf("hello %d years old %s from %s \n", age, name, address)
 
@@ -163,6 +163,8 @@ func main() {
 	// use func
 	message, number := sayHello("ali", "iran", age)
 	println(message, number)
+
+	makeSlice()
 }
 
 // declaring functions
@@ -245,4 +247,54 @@ func makeArray(name string, age int) [2]Person {
 	fmt.Println(arr2)
 
 	return arr1
+}
+
+// Slices
+/*
+	slices are a view of arrays, which are not fixed size.
+*/
+func makeSlice() []int {
+	var arr = [4]int{} // => default values are 0
+
+	// declaring a slice would be like
+	var slice1 = []int{1, 2, 3, 4, 5}
+	// or
+	slice2 := []int{1, 2, 3, 4, 5}
+
+	// we can slice the array!
+	/*
+		[start:end] => will include the start index of array until the end index (end will not be included)
+		[start:] => will include the start index of array to the last index
+		[:end] => will include the first index of array until the end index (end will not be included)
+		[:] => will include whole array
+	*/
+	slice3 := arr[0:2]
+
+	fmt.Println(arr, slice1, slice2, slice3)
+
+	// 2D Slices
+	slice2D := [][]string{
+		{"Hello", "World"},
+		{"Hola", "Mundo"},
+		{"Bonjour", "Le", "Monde"},
+	}
+
+	// slice length
+	var slice2Length int = len(slice2)
+	fmt.Println(slice2Length)
+
+	// range and for each loop
+	// for index, range { code }
+	// range keyword goes for the all the string and arrays indexes
+	for i := 0; i < len(slice2D); i++ {
+		fmt.Printf("the %dth item \n", i+1)
+
+		for _, v := range slice2D[i] {
+			for _, w := range v {
+				fmt.Printf("        %q\n", w)
+			}
+		}
+	}
+
+	return slice3
 }
