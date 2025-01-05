@@ -75,6 +75,18 @@
 		// rune:
 			it is a char like char in java => must be in single quote
 */
+/*
+	<-- Go Struct -->
+
+	*+* we use struct to create objects. it is like a map and structure for our object.
+
+	// Example:
+		type struct_name struct {
+		  member1 datatype;
+		  member2 datatype;
+		  member3 datatype;
+		}
+*/
 
 package main
 
