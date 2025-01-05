@@ -224,3 +224,25 @@ func makeStruct(name string, age int) (Person, Person) {
 
 	return person1, person2
 }
+
+// Arrays
+/*
+	var array_name = [length]datatype{values} // here length is defined
+	or
+	var array_name = [...]datatype{values} // here length is inferred
+	or
+	array_name := [length]datatype{values} // here length is defined
+	or
+	array_name := [...]datatype{values} // here length is inferred
+*/
+func makeArray(name string, age int) [2]Person {
+	person1, person2 := makeStruct(name, age)
+
+	var arr1 = [2]Person{person1, person2}
+
+	arr2 := [...]Person{person1, person2}
+
+	fmt.Println(arr2)
+
+	return arr1
+}
