@@ -115,6 +115,9 @@ import (
 	"fmt"
 )
 
+// we can define alias name for types
+type UserId = int
+
 // The start point function name must be main
 func main() {
 	//	declaring vars
@@ -202,4 +205,22 @@ func sayHello(name, address string, age int) (string, int) { // multi return
 	message := fmt.Sprintf("hello %d years old %s from %s", age, name, address)
 
 	return message, 1
+}
+
+// Struct
+// + the first letter of struct name must be uppercase
+type Person struct {
+	name string
+	age  int
+}
+
+func makeStruct(name string, age int) (Person, Person) {
+
+	var person1 Person
+	person1.name = name
+	person1.age = age
+
+	var person2 = Person{name, age}
+
+	return person1, person2
 }
