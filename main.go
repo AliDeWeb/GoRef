@@ -30,11 +30,11 @@
 	*** Numbers
 		// int:
 			Depends on platform:
-			32 bits in 32 bit systems and
-			64 bit in 64 bit systems
+			32 bits in 32-bit systems and
+			64 bit in 64-bit systems
 			+ range:
-				-2147483648 to 2147483647 in 32 bit systems and
-				-9223372036854775808 to 9223372036854775807 in 64 bit systems
+				-2147483648 to 2147483647 in 32-bit systems and
+				-9223372036854775808 to 9223372036854775807 in 64-bit systems
 
 		// int8:
 			8 bits/1 byte
@@ -122,7 +122,8 @@ import (
 )
 
 // we can define alias name for types
-type UserId = int
+
+type UserAge = int
 
 // The start point function name must be main
 func main() {
@@ -170,7 +171,10 @@ func main() {
 	message, number := sayHello("ali", "iran", age)
 	println(message, number)
 
+	// Functions
+	makeArray("ali", 26)
 	makeSlice()
+	makeMap()
 }
 
 // declaring functions
@@ -189,7 +193,7 @@ func sayHello(name, address string, age int) (string, int) { // multi return
 	// += | *= | /= | -= | %=
 
 	// switch case
-	var test string = "test"
+	var test = "test"
 	switch test {
 	case "john":
 		fmt.Println("ha ha")
@@ -201,7 +205,7 @@ func sayHello(name, address string, age int) (string, int) { // multi return
 	}
 
 	// we can declare var in condition scope like
-	if a := 0; a > 1 {
+	if a := "iran"; address == a {
 		fmt.Println("ha ha")
 	}
 
@@ -217,6 +221,7 @@ func sayHello(name, address string, age int) (string, int) { // multi return
 
 // Struct
 // + the first letter of struct name must be uppercase
+
 type Person struct {
 	name string
 	age  int
@@ -243,7 +248,7 @@ func makeStruct(name string, age int) (Person, Person) {
 	or
 	array_name := [...]datatype{values} // here length is inferred
 */
-func makeArray(name string, age int) [2]Person {
+func makeArray(name string, age UserAge) [2]Person {
 	person1, person2 := makeStruct(name, age)
 
 	var arr1 = [2]Person{person1, person2}
@@ -281,12 +286,12 @@ func makeSlice() []int {
 	// 2D Slices
 	slice2D := [][]string{
 		{"Hello", "World"},
-		{"Hola", "Mundo"},
+		{"Hola", "Mundi"},
 		{"Bonjour", "Le", "Monde"},
 	}
 
 	// slice length
-	var slice2Length int = len(slice2)
+	var slice2Length = len(slice2)
 	fmt.Println(slice2Length)
 
 	// range and for each loop
@@ -314,4 +319,35 @@ func makeSlice() []int {
 	fmt.Println(newFixSizeSlice)
 
 	return slice3
+}
+
+// Maps
+// Maps are key value data store
+func makeMap() map[string]int {
+	// we can declare maps in 2 ways
+	map1 := make(map[string]int) // values are not assigned
+	map2 := map[string]string{   // values are assigned
+		"name": "ali",
+	}
+
+	// insert an item
+	map1["age"] = 26
+
+	// delete an item
+	delete(map2, "name")
+
+	// read an item
+	value := map2["name"]
+
+	fmt.Println(value)
+
+	// check if value exists
+	notExistValue, found := map2["not exist"]
+	if !found {
+		fmt.Println("not exist", "default value is: "+notExistValue)
+	}
+
+	fmt.Println(map1["age"])
+
+	return map1
 }
