@@ -302,5 +302,16 @@ func makeSlice() []int {
 		}
 	}
 
+	// we can make fixed size slices using make keyword, this is useful when we know the size but the values are unknown
+	fixSizeSlice := make([]int, 10)
+	fmt.Println(fixSizeSlice)
+
+	// we can append items to the slice using append keyword
+	//+ notice append won't change the original slice, so it returns the new slice as a new value
+	// we can spread slices using ... syntax, like sliceName...
+	newFixSizeSlice := append(fixSizeSlice, 1)
+	newFixSizeSlice = append(newFixSizeSlice, fixSizeSlice...)
+	fmt.Println(newFixSizeSlice)
+
 	return slice3
 }
