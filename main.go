@@ -17,6 +17,12 @@
 
 	*** go run .
 	// this command is used for run our app without compiling it, it is good for development
+
+	*** go test
+	// this command is used for run app tests
+
+	*** go fmt
+	// this command is used for format the source code
 */
 /*
 	<-- Go Data Types -->
