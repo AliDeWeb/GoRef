@@ -88,6 +88,118 @@
 		}
 */
 
+// The start point package name must be main
 package main
 
-func main() {}
+/*
+	<-- Importing packages -->
+	//+ if we import like, we can directly access of the internal functions of the package without mention its name
+		import (
+			. ***
+		)
+
+
+	import ***
+	or
+	import (
+		***
+		***
+	)
+	or
+	import (
+		***
+		anotherNameForThisPackage ***
+	)
+*/
+import (
+	"fmt"
+)
+
+// The start point function name must be main
+func main() {
+	//	declaring vars
+	//* var -name -datatype = -data
+	//* or
+	//* -name := -data
+	//+ if variable name is _, go will ignore it.
+	//+ in go we cannot declare unused variables.
+	//+ in second way of declaring variables, go will automatically guess the type of var.
+	var _ int8 = 8 // we cannot define another var with this name
+	age := 8       // we can define another var with this name
+	//+ also we can do this
+	name, age, address := "ali", 18, "iran"
+
+	// printf will format out string with the args we pass to it
+	//* %v => general | %s => string | %T => var type | %d => integer | %f => float
+	//* \n creates a new line in console
+	fmt.Printf("hello %d years old %s from %s \n", age, name, address)
+
+	// print var in console
+	//* to do it we should import fmt(formatter) package.
+	fmt.Println(age)
+
+	//	declaring a constance => Must be uppercase
+	//* constance value must be defined at compile time, not in run time.
+	//* const PI = 3.14 => true
+	//* const A = x * 2 => err || it will define in run time.
+	const PI = 3.1415926
+	fmt.Println(PI)
+
+	// default value of int datatypes is 0 and for strings is empty string "", for the others is nil(like null in js)
+	var city string
+	fmt.Println(city) // => ""
+
+	// we can change int datatypes to each other
+	var balance = 50
+	var discountPercent float32 = 70.9
+	var newDiscountPercent = int(discountPercent) // => 70, because it is not float anymore
+	// var finalPrice int = balance * (100 - discountPercent) => this will get err, because datatype is int but result is float
+	var finalPrice = int(float32(balance) * (float32(100) - discountPercent))
+	fmt.Println(finalPrice, newDiscountPercent)
+
+	// use func
+	message, number := sayHello("ali", "iran", age)
+	println(message, number)
+}
+
+// declaring functions
+// + if func name starts with an uppercase letter, we can use it in other package. it is like we export it
+// func sayHello(name string, address string, age int) string { return "" }
+// or
+func sayHello(name, address string, age int) (string, int) { // multi return
+	// conditions
+	if name == "john" && age == 20 {
+		return "you are not allowed", 0
+	} else if age < 18 || name == "mohammad" {
+		return "you are not allowed", 0
+	} else {
+		fmt.Println("ha ha")
+	}
+	// += | *= | /= | -= | %=
+
+	// switch case
+	var test string = "test"
+	switch test {
+	case "john":
+		fmt.Println("ha ha")
+		fallthrough // this will run the next case without checking the case condition
+	case "mohammad":
+		fmt.Println("ha ha")
+	default:
+		fmt.Println("ha ha")
+	}
+
+	// we can declare var in condition scope like
+	if a := 0; a > 1 {
+		fmt.Println("ha ha")
+	}
+
+	// Loops
+	for i := 0; i <= 10; i++ {
+		fmt.Println(i)
+	}
+
+	message := fmt.Sprintf("hello %d years old %s from %s", age, name, address)
+
+	return message, 1
+}
