@@ -175,6 +175,7 @@ func main() {
 	makeArray("ali", 26)
 	makeSlice()
 	makeMap()
+	pointer()
 }
 
 // declaring functions
@@ -350,4 +351,21 @@ func makeMap() map[string]int {
 	fmt.Println(map1["age"])
 
 	return map1
+}
+
+// Pointers
+//
+//	are references to other vars memory address
+func pointer() {
+	name := "john"
+
+	// when we declare a var, we can insert a * before its datatype, it means this var must be a pointer to other var
+	// when we want to pass the pointer its value we must insert a & before the original var name, otherwise go will create a copy of the passed value
+	//+ always remember to use the pointer name with *
+	var namePtr *string
+	namePtr = &name
+
+	*namePtr = "ali"
+
+	fmt.Printf(name)
 }
