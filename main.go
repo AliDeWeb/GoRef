@@ -95,6 +95,7 @@
 */
 
 // The start point package name must be main
+// if many files in a same folder have same package name, we can use the functions without importing them
 package main
 
 /*
@@ -124,6 +125,12 @@ import (
 // we can define alias name for types
 
 type UserAge = int
+
+// in each go file we can have a func named init, it runs just 1 time before the main func runs
+// in that we can check db connection , etc.
+func init() {
+	println("hello")
+}
 
 // The start point function name must be main
 func main() {
@@ -177,6 +184,8 @@ func main() {
 	makeMap()
 	pointer()
 	receiverFunc()
+	variadics()
+	logIota()
 }
 
 // declaring functions
@@ -404,6 +413,10 @@ const (
 	C2
 	D2
 )
+
+func logIota() {
+	fmt.Println(A1, B1, C1, D1, A2, B2, C2, D2)
+}
 
 // Variadics
 // using that we can have many arg in a func
