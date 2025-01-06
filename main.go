@@ -176,6 +176,7 @@ func main() {
 	makeSlice()
 	makeMap()
 	pointer()
+	receiverFunc()
 }
 
 // declaring functions
@@ -368,4 +369,47 @@ func pointer() {
 	*namePtr = "ali"
 
 	fmt.Printf(name)
+}
+
+// Add Receiver Functions
+//
+//	are functions which adds something like a method to a specific datatype, with can access it with dot notation
+
+// MyType => a Receiver Functions cannot be applied to a Golang built in type, we should have custom types
+type MyType int
+
+// Add => the func down is a pointer base method, and this is the value base one => func (n MyType) Add(add MyType)
+func (n *MyType) Add(add MyType) {
+	*n += add
+}
+func receiverFunc() {
+	var age MyType = 18
+	age.Add(2)
+	fmt.Println(age)
+}
+
+// IOTA
+// it helps us to name the constants
+const (
+	A1 = iota
+	B1
+	C1
+	D1
+)
+
+// we can specify the start point
+const (
+	A2 = iota*10 + 1
+	B2
+	C2
+	D2
+)
+
+// Variadics
+// using that we can have many arg in a func
+func variadics(nums ...int) {
+	//	nums would be a slice
+	data := nums[:]
+
+	fmt.Println(data)
 }
