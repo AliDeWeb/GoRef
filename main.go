@@ -18,7 +18,7 @@
 	*** go run .
 	// this command is used for run our app without compiling it, it is good for development
 
-	*** go test
+	*** go summer
 	// this command is used for run app tests
 
 	*** go fmt
@@ -204,7 +204,7 @@ func sayHello(name, address string, age int) (string, int) { // multi return
 	// += | *= | /= | -= | %=
 
 	// switch case
-	var test = "test"
+	var test = "summer"
 	switch test {
 	case "john":
 		fmt.Println("ha ha")
