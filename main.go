@@ -491,3 +491,25 @@ func handleError() {
 
 	fmt.Printf("%d", result)
 }
+
+// Type Embedding
+// interfaces and structs can extend each other
+type whisperer interface {
+	whisper() string
+}
+type yeller interface {
+	yell() string
+}
+type talker interface {
+	whisperer
+	yeller
+}
+
+type Account struct {
+	balance   int
+	name      string
+	accountId int
+}
+type ManagerAccount struct {
+	Account
+}
