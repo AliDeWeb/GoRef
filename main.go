@@ -121,6 +121,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"golang.org/x/exp/constraints"
 )
 
 // we can define alias name for types
@@ -512,4 +513,30 @@ type Account struct {
 }
 type ManagerAccount struct {
 	Account
+}
+
+// Generic types
+// we can use ~ to say anything similar to the original type is allowed
+/*
+	type myType string
+
+	T ~myType
+
+	T can be string and myType
+*/
+/*
+	instead of comparable we can use
+
+	any
+	comparable
+these should be imported from constraints package
+	unsigned
+	signed
+	ordered
+	integer
+	float
+	complex
+*/
+func compare[T constraints.Integer](a, b T) bool {
+	return a == b
 }
