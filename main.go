@@ -557,3 +557,21 @@ func AnonymousMaker(fn func(string) bool) {
 
 	myFn()
 }
+
+// Defers LIFO => last in, first out
+// defers will run after function tasks are done, and they are following LIFO principle
+func Defers() {
+	defer fmt.Println("Defers1")
+	defer fmt.Println("Defers2")
+	defer fmt.Println("Defers3")
+
+	fmt.Println("Defers")
+
+	// the result would be like this
+	/*
+		- Defers
+		- Defers3
+		- Defers2
+		- Defers1
+	*/
+}
