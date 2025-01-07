@@ -188,6 +188,13 @@ func main() {
 	logIota()
 	var makeInterfaceArg MyType2 = "ali"
 	makeInterface(&makeInterfaceArg)
+	result, err := div(10, 0)
+	// in this case the Error() will be called automatically
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(result)
+	}
 }
 
 // declaring functions
@@ -443,4 +450,24 @@ func (t *MyType2) Hello() {
 }
 func makeInterface(i MyInterface) {
 	i.Hello()
+}
+
+// Error Handling
+// lets do this using a div func
+
+type DivError struct {
+	a, b int
+}
+
+// when a value implements the Error() => string method, it is an error
+func (d *DivError) Error() string {
+	return fmt.Sprintf("%d / %d is not allowed", d.a, d.b)
+}
+
+func div(a, b int) (int, error) {
+	if b == 0 {
+		return 0, &DivError{a, b}
+	}
+
+	return a / b, nil
 }
