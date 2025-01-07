@@ -186,6 +186,8 @@ func main() {
 	receiverFunc()
 	variadics()
 	logIota()
+	var makeInterfaceArg MyType2 = "ali"
+	makeInterface(&makeInterfaceArg)
 }
 
 // declaring functions
@@ -425,4 +427,20 @@ func variadics(nums ...int) {
 	data := nums[:]
 
 	fmt.Println(data)
+}
+
+// Interfaces
+// in golang, a struct won't implement an interface!
+// it actually happens automatically when a struct has all methods in the interface
+
+type MyInterface interface {
+	Hello()
+}
+type MyType2 string
+
+func (t *MyType2) Hello() {
+	fmt.Printf("%s says Hello", *t)
+}
+func makeInterface(i MyInterface) {
+	i.Hello()
 }
