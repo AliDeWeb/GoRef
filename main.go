@@ -119,6 +119,7 @@ package main
 	)
 */
 import (
+	"errors"
 	"fmt"
 )
 
@@ -470,4 +471,23 @@ func div(a, b int) (int, error) {
 	}
 
 	return a / b, nil
+}
+
+func handleError() {
+	result, err := div(10, 0)
+
+	// by using errors.is we can check if error is the error that we expect or not
+	if errors.Is(err, &DivError{}) {
+		fmt.Println("DivError")
+	} else {
+		fmt.Printf("another err")
+	}
+
+	// by using errors.as we can check if error is the error that we expect or not and we can change it
+	var divErr *DivError
+	if errors.As(err, &divErr) {
+		fmt.Println("DivError:", divErr.a, divErr.b)
+	}
+
+	fmt.Printf("%d", result)
 }
