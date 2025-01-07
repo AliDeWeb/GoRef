@@ -540,3 +540,20 @@ these should be imported from constraints package
 func compare[T constraints.Integer](a, b T) bool {
 	return a == b
 }
+
+// AnonymousMaker Anonymous function
+// it does not have a name and can be called directly after declaration
+// + we can pass functions as other functions arg
+func AnonymousMaker(fn func(string) bool) {
+	fn("hello")
+	func() {
+		fmt.Println("Anonymous Func")
+	}()
+
+	// we can name functions
+	myFn := func() {
+		fmt.Println("MyFn")
+	}
+
+	myFn()
+}
