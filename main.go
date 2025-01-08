@@ -121,6 +121,8 @@ package main
 import (
 	"errors"
 	"fmt"
+	"time"
+
 	"golang.org/x/exp/constraints"
 )
 
@@ -574,4 +576,79 @@ func Defers() {
 		- Defers2
 		- Defers1
 	*/
+}
+
+// Concurrent programming
+// in golang we can use go keyword to run a function as a concurrent, we call this function a goroutine
+func Concurrent() {
+	go func() {
+		fmt.Println("Concurrent 1")
+	}()
+
+	go func() {
+		fmt.Println("Concurrent 2")
+	}()
+
+	go func() {
+		fmt.Println("Concurrent 3")
+	}()
+
+	// we can sleep our app using:
+	time.Sleep(5 * time.Millisecond)
+
+	// using channels we can transfer data between goroutines
+	// there is two types of channels, buffered and unbuffered
+	// unbuffered channels just can store 1 single data and when a sender send it to the channel a receiver must receive it
+	// otherwise the code will be blocked until a receiver receive the data
+	// buffered channels can store multiple data, and when a sender send data to the channel, the code will not be blocked
+	// buffered channels have specific storage size, and when it is full, the code will be blocked until a receiver receive the data
+	// unbuffered channels are made like this
+	// buffered channels are like => ch := make(chan int, 10)
+	ch := make(chan int)
+
+	go func() {
+		// FIFO => first in, first out
+		ch <- 5
+
+		// this will be blocked, because we don't have any receiver
+		ch <- 6
+
+		// this will not be executed, because code is blocked
+		fmt.Println("won't be executed")
+	}()
+
+	firstChannelData := <-ch
+
+	fmt.Println(firstChannelData)
+
+	// using select case we can listen to multiple channels to receive one data
+	// after receiving the data, the other cases won't be executed
+	ch1 := make(chan string, 10)
+	ch2 := make(chan string, 15)
+	go func() {
+		time.Sleep(1 * time.Second)
+		ch1 <- "Data from ch1"
+	}()
+
+	go func() {
+		time.Sleep(2 * time.Second)
+		ch2 <- "Data from ch2"
+	}()
+
+	select {
+	case data := <-ch1:
+		fmt.Println("Received:", data)
+
+	// this will be ignored because the first case is executed
+	case data := <-ch2:
+		fmt.Println("Received:", data)
+
+	// if we don't have the default, code will be blocked until a value is received
+	// but if we have default, when select case wants to be executed and if there is no data received from the channels
+	// default case will be executed.
+	// and if all data is received then go will select one of them randomly.
+	default:
+		fmt.Println("No data received")
+	}
+
 }
