@@ -121,6 +121,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"sync"
 	"time"
 
 	"golang.org/x/exp/constraints"
@@ -651,4 +652,37 @@ func Concurrent() {
 		fmt.Println("No data received")
 	}
 
+}
+
+// Mutex
+// it is used to lock the code and prevent concurrent access to a shared resource
+type MutexType struct {
+	counter int
+	mu      sync.Mutex
+}
+
+func (m *MutexType) increase(wg *sync.WaitGroup) {
+	m.mu.Lock()
+	defer wg.Done()
+	defer m.mu.Unlock()
+	m.counter++
+}
+func (m *MutexType) decrease(wg *sync.WaitGroup) {
+	m.mu.Lock()
+	defer wg.Done()
+	defer m.mu.Unlock()
+	m.counter--
+}
+func DoAction() {
+	// we use wait groups to wait for the goroutines to finish their tasks
+	var wg sync.WaitGroup
+
+	var mu sync.Mutex
+	myVar := &MutexType{1, mu}
+
+	wg.Add(2)
+	go myVar.increase(&wg)
+	go myVar.decrease(&wg)
+
+	wg.Wait()
 }
